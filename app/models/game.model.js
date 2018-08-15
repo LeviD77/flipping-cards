@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const GameSchema = mongoose.Schema({
+	token: String,
+	deckSize: Number,
 	pictures: [{
 		type: String
 	}],
-	token: String,
-	deckSize: Number,
 }, {
     timestamps: true
 });

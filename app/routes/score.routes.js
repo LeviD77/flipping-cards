@@ -1,7 +1,7 @@
 module.exports = (app) => {
     const scores = require('../controllers/score.controller.js');
 
-    // Create a new score record
+    // Create a new Score record
     app.post('/score', scores.create);
 
     // Retrieve all Scores

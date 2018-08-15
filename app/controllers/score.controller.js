@@ -43,11 +43,12 @@ exports.create = (req, res) => {
 			}
 			else
 			{
-				// Validate if user already submitted a score record for this game
+				// Validate if someone already submitted a score record for this game
 				Score.findOne({ token: req.body.token })
 						.then(score => {
 							
-							if(score) {
+							if(score)
+							{
 								res.status(200).send({
 									message: "This is unfortunate, someone already submitted the score points for this game!"
 								});
@@ -65,38 +66,42 @@ exports.create = (req, res) => {
 
 								// Save Score in the database
 								score.save()
-									.then(data => {
+										.then(data => {
 
-										// Get position ranking for score
-									    Score.find().sort({ score: -1 })
-											    .then(scores => {
+											// Get position ranking for score
+											Score.find().sort({ score: -1 })
+													.then(scores => {
 
-											    	const position = scores.map(e => e.token).indexOf(req.body.token) + 1;
+														const position = scores.map(e => e.token).indexOf(req.body.token) + 1;
 
-													// Success return for new Score record
-											        res.status(200).send({
-														position: position
+														// Success return for new Score record
+														res.status(200).send({
+															position: position
+														});
+													}).catch(err => {
+														
+														res.status(500).send({
+															message: err.message || "Some error occurred while retrieving scores."
+														});
 													});
-											    }).catch(err => {
-											        res.status(500).send({
-											            message: err.message || "Some error occurred while retrieving scores."
-											        });
-											    });
-									}).catch(err => {
-										res.status(500).send({
-											message: err.message || "Some error occurred while creating the Score record."
+										}).catch(err => {
+											
+											res.status(500).send({
+												message: err.message || "Some error occurred while creating the Score record."
+											});
 										});
-									});
 							}
 
 						}).catch(err => {
+							
 							res.status(500).send({
-								message: err.message || "Some error occurred while retrieving this score record."
+								message: err.message || "Some error occurred while retrieving this Score record."
 							});
 						});
 			}
 
 		}).catch(err => {
+			
 			res.status(500).send({
 				message: err.message || "Some error occurred while retrieving this game."
 			});
@@ -105,12 +110,15 @@ exports.create = (req, res) => {
 
 // Retrieve and return all scores from the database
 exports.findAll = (req, res) => {
-    Score.find().sort({ score: -1 })
-		    .then(scores => {
-		        res.send(scores);
-		    }).catch(err => {
-		        res.status(500).send({
-		            message: err.message || "Some error occurred while retrieving scores."
-		        });
-		    });
+	
+	Score.find().sort({ score: -1 })
+			.then(scores => {
+
+				res.send(scores);
+			}).catch(err => {
+				
+				res.status(500).send({
+					message: err.message || "Some error occurred while retrieving scores."
+				});
+			});
 };
