@@ -8,6 +8,9 @@ const app = express();
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
 
+// Configuring the server
+const srvConfig = require('./config/server.config.js');
+
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
@@ -32,6 +35,6 @@ require('./app/routes/game.routes.js')(app);
 require('./app/routes/score.routes.js')(app);
 
 // Listen for requests
-app.listen(8080, () => {
-    console.log("Server is listening on port 8080");
+app.listen(srvConfig.port, () => {
+    console.log("Server is listening on port " + srvConfig.port);
 });
