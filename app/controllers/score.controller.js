@@ -49,7 +49,7 @@ exports.create = (req, res) => {
 							
 							if(score)
 							{
-								res.status(200).send({
+								res.status(400).send({
 									message: "This is unfortunate, someone already submitted the score points for this game!"
 								});
 							}
@@ -76,6 +76,7 @@ exports.create = (req, res) => {
 
 														// Success return for new Score record
 														res.status(200).send({
+															message: 'Successful Score save!',
 															position: position
 														});
 													}).catch(err => {

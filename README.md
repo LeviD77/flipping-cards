@@ -1,1 +1,1 @@
-# flipping-cards
+# SuperCharge homework for JavaScript developer
