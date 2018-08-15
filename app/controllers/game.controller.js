@@ -6,10 +6,10 @@ exports.create = (req, res) => {
 	var deckSize = parseInt(req.params.size);
 	
 	// Validate if size variable is a number
-	if(!deckSize)
+	if(!deckSize || deckSize < 3)
 	{
 		return res.status(400).send({
-	                message: "You must specify a deck size (whole number)!"
+	                message: "You must specify a deck size (whole number, 4 or bigger)!"
 	            });
 	}
 
@@ -32,21 +32,20 @@ exports.create = (req, res) => {
 	// Create a Game
     const game = new Game({
         token: 'SC_' + Math.random().toString(36).substr(2, 9),
-        pictures: pictures
+        pictures: pictures,
+        deckSize: deckSize,
     });
 
     // Save Game in the database
     game.save()
 	    .then(data => {
-	        res.send(data);
+	        // Success return for new Game created
+			res.status(200).send({
+                message: game
+            });
 	    }).catch(err => {
 	        res.status(500).send({
 	            message: err.message || "Some error occurred while creating the Game."
 	        });
 	    });
-
-	// Success return for new Game created
-	return res.status(200).send({
-	                message: game
-	            });
 };

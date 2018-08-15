@@ -5,6 +5,7 @@ const GameSchema = mongoose.Schema({
 		type: String
 	}],
 	token: String,
+	deckSize: Number,
 }, {
     timestamps: true
 });
