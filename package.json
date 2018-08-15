@@ -1,0 +1,17 @@
+{
+  "name": "flipping-cards",
+  "version": "1.0.0",
+  "description": "Supercharge JavaScript homework.",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "author": "Levente Székely",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.8"
+  }
+}
