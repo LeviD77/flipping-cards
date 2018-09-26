@@ -1,4 +1,4 @@
-# SuperCharge homework for JavaScript developer
+# Homework for JavaScript developer
 
 1. Download the git repository
 2. Navigate to to the root folder
